@@ -1,0 +1,46 @@
+name: Trigger API via Python on push to main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-python-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Run Python to call API
+      run: |
+        python3 <<EOF
+        import requests
+        import os
+
+        url = "https://api.example.com/github-update"
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {os.getenv('MY_API_TOKEN')}"
+        }
+
+        payload = {
+            "event": "git_push",
+            "info": {
+                "repo_url": "https://github.com/${{ github.repository }}",
+                "commit_id": "${{ github.sha }}",
+                "author": "${{ github.actor }}"
+            }
+        }
+
+        try:
+            res = requests.post(url, json=payload, headers=headers)
+            print("API response:", res.text)
+        except Exception as e:
+            print("API call failed:", str(e))
+        EOF
+      env:
+        MY_API_TOKEN: ${{ secrets.MY_API_TOKEN }}
