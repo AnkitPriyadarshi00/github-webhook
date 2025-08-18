@@ -3,7 +3,7 @@ name: Webhook Test
 on:
   push:
     branches:
-      - main  # or the branch you want to monitor
+      - main  # or your default branch
 
 jobs:
   run-on-push:
@@ -13,7 +13,7 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
 
-    - name: Print a message
-      run: echo "GitHub push event detected! Commit message: ${{ github.event.head_commit.message }}"
-
-    # You can add more steps here like calling your local API or running scripts
+    - name: Print commit message
+      run: |
+        echo "GitHub push event detected!"
+        echo "Commit message: ${{ github.event.head_commit.message }}"
