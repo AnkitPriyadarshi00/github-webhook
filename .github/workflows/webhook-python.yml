@@ -24,10 +24,10 @@ jobs:
         import requests
         import os
 
-        url = "https://api.example.com/github-update"
+        url = "https://webhook.site/46837762-c5e5-4a80-81b2-12327c9175e0"
         headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {os.getenv('MY_API_TOKEN')}"
+            #"Authorization": f"Bearer {os.getenv('MY_API_TOKEN')}"
         }
 
         payload = {
