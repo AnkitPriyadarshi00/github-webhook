@@ -45,6 +45,6 @@ jobs:
             print("Response:", response.text)
         except Exception as e:
             print("Failed to call API:", str(e))
-        EOF
-      env:
-        MY_API_TOKEN: ${{ secrets.MY_API_TOKEN }}
+        #EOF
+      #env:
+        #MY_API_TOKEN: ${{ secrets.MY_API_TOKEN }}
