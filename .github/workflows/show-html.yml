@@ -13,8 +13,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Display contents of index1.html
+      - name: Display contents of index.html
         run: |
-          echo "----- index1.html content start -----"
-          cat index1.html
-          echo "----- index1.html content end -----"
+          echo "----- index.html content start -----"
+          cat index.html
+          echo "----- index.html content end -----"
