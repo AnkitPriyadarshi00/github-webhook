@@ -15,7 +15,10 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Run Python to call API
+    - name: Install Python dependencies
+      run: pip install requests
+
+    - name: Run Python script to call external API
       run: |
         python3 <<EOF
         import requests
@@ -37,10 +40,11 @@ jobs:
         }
 
         try:
-            res = requests.post(url, json=payload, headers=headers)
-            print("API response:", res.text)
+            response = requests.post(url, json=payload, headers=headers)
+            print("Status:", response.status_code)
+            print("Response:", response.text)
         except Exception as e:
-            print("API call failed:", str(e))
+            print("Failed to call API:", str(e))
         EOF
       env:
         MY_API_TOKEN: ${{ secrets.MY_API_TOKEN }}
